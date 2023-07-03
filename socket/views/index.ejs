@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="/socket.io/socket.io.js"></script>
+<body>
+        <div style="padding: 10px;">   <input type="text" name="" placeholder="
+            enter your room id" id="roomid" >
+            <button onclick="joinroom()">join</button>
+        </div>
+
+
+   <input type="text" name="" id="inp"> 
+   <button id="btn" onclick="send()">send</button>
+  
+  
+  <script>
+    const txt = document.getElementById("inp")
+    const roomid = document.getElementById("roomid")
+    const btn = document.getElementById("btn")
+    const socket =io()
+
+    const joinroom=()=>{
+        socket.emit('join',roomid.value)
+    }
+
+    const send =()=>{
+        let obj={msg:txt.value,id:roomid.value}
+        socket.emit("send---",obj)
+    }
+
+    socket.on("recve",(data)=>{
+        console.log(data);
+    })
+
+   </script>
+</body>
+</html>
